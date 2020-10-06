@@ -3,7 +3,10 @@ var sslRedirect = require("heroku-ssl-redirect");
 // Get twillio auth and SID from heroku if deployed, else get from local .env file
 var twillioAuthToken = process.env.HEROKU_AUTH_TOKEN || process.env.LOCAL_AUTH_TOKEN;
 var twillioAccountSID = process.env.HEROKU_TWILLIO_SID || process.env.LOCAL_TWILLIO_SID;
-var twilio = require("twilio")(process.env.TWILIO_ACCOUNT_SID, process.env.LOCAL_AUTH_TOKEN);
+var twilio = require("twilio")(
+    AC3966345b4262d57c925ff3df21b1e640, 
+    d7fde3319cf34d5c840a82f1894a8bfc
+  );
 var express = require("express");
 var app = express();
 var http = require("http").createServer(app);
