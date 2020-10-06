@@ -4,8 +4,8 @@ var sslRedirect = require("heroku-ssl-redirect");
 var twillioAuthToken = process.env.HEROKU_AUTH_TOKEN || process.env.LOCAL_AUTH_TOKEN;
 var twillioAccountSID = process.env.HEROKU_TWILLIO_SID || process.env.LOCAL_TWILLIO_SID;
 var twilio = require("twilio")(
-    AC3966345b4262d57c925ff3df21b1e640, 
-    d7fde3319cf34d5c840a82f1894a8bfc
+    "AC3966345b4262d57c925ff3df21b1e640", 
+    "d7fde3319cf34d5c840a82f1894a8bfc"
   );
 var express = require("express");
 var app = express();
