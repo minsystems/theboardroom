@@ -1,4 +1,4 @@
-# Zipcall - Decentralized Video Chat
+# Boardroom - Decentralized Video Chat With Multiconferencing
 
 [![Author](https://img.shields.io/badge/Author-ianramzy-brightgreen.svg)](https://ianramzy.com)
 ![License: CC-NC](https://img.shields.io/badge/License-CCNC-blue.svg)
@@ -7,7 +7,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
 [![Join the chat at https://gitter.im/zipcall](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zipcall)
 
-# https://zipcall.io
+# https://boardroom.ng
 
 Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infrastructure.
 Zipcall provides video quality and latency simply not available with traditional

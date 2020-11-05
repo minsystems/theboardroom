@@ -31,7 +31,7 @@
 /* End Fade in page on load*/
 
 body {
-  background: #16171b;
+  background: url('../assets/img/background/img-85.jpg');;
   margin: 0;
   padding: 0;
   opacity: 0; /* make things invisible upon start */
@@ -48,7 +48,7 @@ body {
 }
 
 video {
-  background: #16171a;
+  background: url('../assets/img/background/img-85.jpg');
 }
 
 #header {
@@ -179,8 +179,7 @@ button:hover {
   transform: translate(0%, -50%);
   z-index: 999;
   border-radius: 10px;
-  background: #16171a;
-  box-shadow: 9px 9px 16px #0a0b0c, -9px -9px 16px #222328;
+  background: #1ec198;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -197,8 +196,7 @@ button:hover {
   left: 60px;
   white-space: nowrap;
   top: 0px;
-  font-weight: bold;
-  background: #16171a;
+  background: #1ec198;
   padding: 10px;
   border-radius: 10px;
 }
@@ -232,11 +230,10 @@ button:hover {
   right: 0;
   z-index: 100;
   border-radius: 20px;
-  box-shadow: 6px 6px 12px #030506, -6px -6px 12px #292a30;
   margin: 20px;
   box-sizing: border-box;
   padding: 16px;
-  background: #1c1d22;
+  background: #1ec198;
   overflow-x: hidden;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;

@@ -1,5 +1,4 @@
 .snackbar-container {
-  box-shadow: 9px 9px 16px #0a0b0c, -9px -9px 16px #222328;
   transition: all 0.5s ease;
   transition-property: top, right, bottom, left, opacity;
   font-family: "Heebo", sans-serif;
@@ -18,7 +17,7 @@
   z-index: 9999;
 
   background-color: #376df9;
-  background: linear-gradient(100deg, #376df9 0, #ff5fa0 75%, #ffc55a 100%);
+  background: #376df9
 }
 
 .snackbar-container .action {
