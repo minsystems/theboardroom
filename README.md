@@ -12,7 +12,7 @@ Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infra
 
 ## Features
 
-<img align="right" width="400" height="auto" src="public/assets/images/background/img-85.png">
+<img align="right" width="400" height="auto" src="public/assets/img/background/img-85.jpg">
 
 - Screen sharing
 - Picture in picture
