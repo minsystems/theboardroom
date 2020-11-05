@@ -27,3 +27,8 @@ Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infra
 
 - You will need to have Node.js installed, this project has been tested with Node version 10.X and 12.X
 - Fully Owned By Minsystems NG
+
+## Respect to IAMRAMZY
+
+- For helping me and granting me the go-ahead in achieving this much
+- Cheers!
