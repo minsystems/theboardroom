@@ -6,13 +6,13 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
 
 
-# https://boardroom.ng
+# https://www.boardroom.ng
 
 Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infrastructure.
 
 ## Features
 
-<img align="right" width="400" height="auto" src="public/images/preview.gif">
+<img align="right" width="400" height="auto" src="public/assets/images/background/img-85.png">
 
 - Screen sharing
 - Picture in picture
