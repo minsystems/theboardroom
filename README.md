@@ -1,4 +1,4 @@
-# Boardroom - Decentralized Video Chat With Multiconferencing
+# The Boardroom - Decentralized Video Chat With Multiconferencing
 
 [![Developer](https://img.shields.io/badge/Developer-Mathemartins-blueviolet)](https://theboardroom.ng)
 ![License: CC-NC](https://img.shields.io/badge/License-CCNC-blue.svg)
@@ -6,7 +6,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
 
 
-# https://www.boardroom.ng
+# https://www.boardroom.com.ng
 
 Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infrastructure.
 

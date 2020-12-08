@@ -116,16 +116,25 @@
 
     <div class="center">
       <ul class="menu">
-        <li><a href="#">Features</a></li>
+        <li><a href="#features">Features</a></li>
         <li><a href="#">Host A Meeting</a></li>
         <li><a href="#">Plans &amp; Pricing</a></li>
-        <li><a href="#">Sign In</a></li>
+        <li><a href="/login">Sign In</a></li>
       </ul>
     </div>
-    <div class="right"><a class="button blue gradient" href="#">Profile</a><a class="button green gradient" href="#">Get App</a></div>
+    <div class="right">
+      <a class="button blue gradient" href="#">Account</a>
+<!--      <form action="/logout?_method=DELETE" method="post">-->
+<!--        <button class="button green gradient" type="submit">Log Out</button>-->
+<!--      </form>-->
+    </div>
   </div>
   <div class="sections compact hidden">
-    <div class="left"><a href="#" title="Slides Framework"><svg style="width:82px;height:24px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo"></use></svg></a></div>
+    <div class="left">
+      <a href="#" title="Slides Framework">
+        The Boardroom
+      </a>
+    </div>
     <div class="right"><span class="button actionButton sidebarTrigger" data-sidebar-id="1"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu"></use></svg></span></div>
   </div>
 </nav>
@@ -134,7 +143,9 @@
   <nav class="sidebar" data-sidebar-id="1">
   <div class="close"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close"></use></svg></div>
   <div class="content">
-    <a href="#" class="logo"><svg width="37" height="30"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-icon"></use></svg></a>
+    <a href="#" class="logo" style="color: white">
+      The Boardroom
+    </a>
     <ul class="mainMenu margin-top-3">
       <li><a href="#">Features</a></li>
       <li><a href="#">Host A Meeting</a></li>
@@ -166,7 +177,12 @@
                   Simple, Secure, and Fast. Peer to peer &amp; Multiconferencing video calling. Provides quality and minimal latency.
                 </span>
               </p>
-              <a class="button blue gradient ae-3 fromCenter cropLeft" href="newcall.html">Get Started</a><a class="button white ae-4 fromCenter">Learn more</a>
+              <a class="button blue gradient ae-3 fromCenter cropLeft" href="/newcall">
+                Get Started
+              </a>
+              <a class="button white ae-4 fromCenter">
+                Learn more
+              </a>
             </li>
             <li class="col-6-12">
               <img class="ae-4" width="605" src="assets/img/iphones-34.png" alt="iPhones Thumbnail" data-action="zoom"/>
@@ -200,7 +216,7 @@
 </section>
 
 <!-- Slide 3 (#27) -->
-<section class="slide fade-6 kenBurns">
+<section class="slide fade-6 kenBurns" id="#features">
   <div class="content">
     <div class="container">
       <div class="wrap">
@@ -406,7 +422,7 @@
 <!-- Panel Bottom #01 -->
 <nav class="panel bottom forceMobileView">
   <div class="sections desktop">
-    <div class="left"><a href="#" class="opacity-8">Available <svg style="height:21px;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#apple"></use></svg> iPhone</a></div>
+    <div class="left"><a href="#" class="opacity-8">Coming Soon to <svg style="height:21px;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#apple"></use></svg> iOS &amp; Android</a></div>
     <div class="center"><span class="nextSlide"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-down"></use></svg></span></div>
     <div class="right"><span data-dropdown-id="2" class="button actionButton dropdownTrigger"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#share"></use></svg></span></div>
   </div>
@@ -418,7 +434,7 @@
 </nav>
 
 <!-- Share Window -->
-<div class="dropdown share bottom right" data-dropdown-id="2" data-text="Take a look at this" data-url="https://designmodo.com" data-pinterest-image="https://designmodo.com/wp-content/uploads/2015/10/Presentation.jpg">
+<div class="dropdown share bottom right" data-dropdown-id="2" data-text="Take a look at this" data-url="https://www.theboardroom.com.ng" data-pinterest-image="#">
   <div class="center padding-2">
     <div class="title">Share</div>
     <a href="#">Contact us</a>
