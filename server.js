@@ -1,4 +1,3 @@
-require("dotenv").config();
 let sslRedirect = require("heroku-ssl-redirect");
 // Get twillio auth and SID from heroku if deployed, else get from local .env file
 let twilio = require("twilio")("AC3966345b4262d57c925ff3df21b1e640", "d7fde3319cf34d5c840a82f1894a8bfc");
