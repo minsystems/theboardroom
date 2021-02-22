@@ -164,7 +164,7 @@ io.on("connection", function (socket) {
     var numClients = typeof clients !== "undefined" ? clients.length : 0;
     if (numClients === 0) {
       socket.join(room);
-    } else if (numClients === 1) {
+    } else if (numClients === 50) {
       socket.join(room);
       // When the client is second to join the room, both clients are ready.
       logIt("Broadcasting ready message", room);
