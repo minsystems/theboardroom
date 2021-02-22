@@ -154,7 +154,7 @@ function logIt(msg, room) {
   }
 }
 
-// When a socket connects, set up the specific listeners we will use.
+// When a socket connects, set up the specific listeners we will use. change
 io.on("connection", function (socket) {
   // When a client tries to join a room, only allow them if they are first or
   // second in the room. Otherwise it is full.
