@@ -1,4 +1,3 @@
-// Vars
 var isMuted;
 var videoIsPaused;
 var dataChanel = null;
@@ -10,11 +9,11 @@ var mode = "camera";
 var sendingCaptions = false;
 var receivingCaptions = false;
 const isWebRTCSupported =
-  navigator.getUserMedia ||
-  navigator.webkitGetUserMedia ||
-  navigator.mozGetUserMedia ||
-  navigator.msGetUserMedia ||
-  window.RTCPeerConnection;
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia ||
+    window.RTCPeerConnection;
 
 // Element vars
 const chatInput = document.querySelector(".compose input");
@@ -43,23 +42,23 @@ var VideoChat = {
     logIt("requestMediaStream");
     rePositionLocalVideo();
     navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: true,
-      })
-      .then((stream) => {
-        VideoChat.onMediaStream(stream);
-        localVideoText.text("Drag Me");
-        setTimeout(() => localVideoText.fadeOut(), 5000);
-      })
-      .catch((error) => {
-        logIt(error);
-        logIt(
-          "Failed to get local webcam video, check webcam privacy settings"
-        );
-        // Keep trying to get user media
-        setTimeout(VideoChat.requestMediaStream, 1000);
-      });
+        .getUserMedia({
+          video: true,
+          audio: true,
+        })
+        .then((stream) => {
+          VideoChat.onMediaStream(stream);
+          localVideoText.text("Drag Me");
+          setTimeout(() => localVideoText.fadeOut(), 5000);
+        })
+        .catch((error) => {
+          logIt(error);
+          logIt(
+              "Failed to get local webcam video, check webcam privacy settings"
+          );
+          // Keep trying to get user media
+          setTimeout(VideoChat.requestMediaStream, 1000);
+        });
   },
 
   // Called when a video stream is added to VideoChat
@@ -81,9 +80,9 @@ var VideoChat = {
         // adding the text we want to that element, selecting it, then deleting it
         var copyContent = window.location.href;
         $('<input id="some-element">')
-          .val(copyContent)
-          .appendTo("body")
-          .select();
+            .val(copyContent)
+            .appendTo("body")
+            .select();
         document.execCommand("copy");
         var toRemove = document.querySelector("#some-element");
         toRemove.parentNode.removeChild(toRemove);
@@ -98,8 +97,8 @@ var VideoChat = {
     VideoChat.socket.on("offer", VideoChat.onOffer);
     VideoChat.socket.on("ready", VideoChat.readyToCall);
     VideoChat.socket.on(
-      "willInitiateCall",
-      () => (VideoChat.willInitiateCall = true)
+        "willInitiateCall",
+        () => (VideoChat.willInitiateCall = true)
     );
   },
 
@@ -167,7 +166,7 @@ var VideoChat = {
       VideoChat.socket.on("answer", VideoChat.onAnswer);
       VideoChat.socket.on("requestToggleCaptions", () => toggleSendCaptions());
       VideoChat.socket.on("recieveCaptions", (captions) =>
-        recieveCaptions(captions)
+          recieveCaptions(captions)
       );
       // Called when there is a change in connection state
       VideoChat.peerConnection.oniceconnectionstatechange = function (event) {
@@ -200,14 +199,14 @@ var VideoChat = {
     logIt("onIceCandidate");
     if (event.candidate) {
       logIt(
-        `<<< Received local ICE candidate from STUN/TURN server (${event.candidate.address})`
+          `<<< Received local ICE candidate from STUN/TURN server (${event.candidate.address})`
       );
       if (VideoChat.connected) {
         logIt(`>>> Sending local ICE candidate (${event.candidate.address})`);
         VideoChat.socket.emit(
-          "candidate",
-          JSON.stringify(event.candidate),
-          roomHash
+            "candidate",
+            JSON.stringify(event.candidate),
+            roomHash
         );
       } else {
         // If we are not 'connected' to the other peer, we are buffering the local ICE candidates.
@@ -226,7 +225,7 @@ var VideoChat = {
     captionText.text("Found other user... connecting");
     rtcCandidate = new RTCIceCandidate(JSON.parse(candidate));
     logIt(
-      `onCandidate <<< Received remote ICE candidate (${rtcCandidate.address} - ${rtcCandidate.relatedAddress})`
+        `onCandidate <<< Received remote ICE candidate (${rtcCandidate.address} - ${rtcCandidate.relatedAddress})`
     );
     VideoChat.peerConnection.addIceCandidate(rtcCandidate);
   },
@@ -235,17 +234,17 @@ var VideoChat = {
   createOffer: function () {
     logIt("createOffer >>> Creating offer...");
     VideoChat.peerConnection.createOffer(
-      function (offer) {
-        // If the offer is created successfully, set it as the local description
-        // and send it over the socket connection to initiate the peerConnection
-        // on the other side.
-        VideoChat.peerConnection.setLocalDescription(offer);
-        VideoChat.socket.emit("offer", JSON.stringify(offer), roomHash);
-      },
-      function (err) {
-        logIt("failed offer creation");
-        logIt(err, true);
-      }
+        function (offer) {
+          // If the offer is created successfully, set it as the local description
+          // and send it over the socket connection to initiate the peerConnection
+          // on the other side.
+          VideoChat.peerConnection.setLocalDescription(offer);
+          VideoChat.socket.emit("offer", JSON.stringify(offer), roomHash);
+        },
+        function (err) {
+          logIt("failed offer creation");
+          logIt(err, true);
+        }
     );
   },
 
@@ -261,14 +260,14 @@ var VideoChat = {
       rtcOffer = new RTCSessionDescription(JSON.parse(offer));
       VideoChat.peerConnection.setRemoteDescription(rtcOffer);
       VideoChat.peerConnection.createAnswer(
-        function (answer) {
-          VideoChat.peerConnection.setLocalDescription(answer);
-          VideoChat.socket.emit("answer", JSON.stringify(answer), roomHash);
-        },
-        function (err) {
-          logIt("Failed answer creation.");
-          logIt(err, true);
-        }
+          function (answer) {
+            VideoChat.peerConnection.setLocalDescription(answer);
+            VideoChat.socket.emit("answer", JSON.stringify(answer), roomHash);
+          },
+          function (err) {
+            logIt("Failed answer creation.");
+            logIt(err, true);
+          }
       );
     };
   },
@@ -278,8 +277,8 @@ var VideoChat = {
   onOffer: function (offer) {
     logIt("onOffer <<< Received offer");
     VideoChat.socket.on(
-      "token",
-      VideoChat.onToken(VideoChat.createAnswer(offer))
+        "token",
+        VideoChat.onToken(VideoChat.createAnswer(offer))
     );
     VideoChat.socket.emit("token", roomHash);
   },
@@ -351,7 +350,7 @@ function logIt(message, error) {
 // Called when socket receives message that room is full
 function chatRoomFull() {
   alert(
-    "Chat room is full. Check to make sure you don't have multiple open tabs, or try with a new room link"
+      "Chat room is full. Check to make sure you don't have multiple open tabs, or try with a new room link"
   );
   // Exit room and redirect
   window.location.href = "/newcall";
@@ -363,9 +362,9 @@ function rePositionLocalVideo() {
   var bounds = remoteVideo.position();
   let localVideo = $("#local-video");
   if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    )
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+      )
   ) {
     bounds.top = $(window).height() * 0.7;
     bounds.left += 10;
@@ -513,7 +512,7 @@ function swap() {
     // Show accept screenshare snackbar
     Snackbar.show({
       text:
-        "Please allow screen share. Click the middle of the picture above and then press share.",
+          "Please allow screen share. Click the middle of the picture above and then press share.",
       width: "400px",
       pos: "bottom-center",
       actionTextColor: "#616161",
@@ -522,45 +521,45 @@ function swap() {
     // Request screen share, note we dont want to capture audio
     // as we already have the stream from the Webcam
     navigator.mediaDevices
-      .getDisplayMedia({
-        video: true,
-        audio: false,
-      })
-      .then(function (stream) {
-        // Close allow screenshare snackbar
-        Snackbar.close();
-        // Change display mode
-        mode = "screen";
-        // Update swap button icon and text
-        swapIcon.classList.remove("fa-desktop");
-        swapIcon.classList.add("fa-camera");
-        swapText.innerText = "Share Webcam";
-        switchStreamHelper(stream);
-      })
-      .catch(function (err) {
-        logIt(err);
-        logIt("Error sharing screen");
-        Snackbar.close();
-      });
+        .getDisplayMedia({
+          video: true,
+          audio: false,
+        })
+        .then(function (stream) {
+          // Close allow screenshare snackbar
+          Snackbar.close();
+          // Change display mode
+          mode = "screen";
+          // Update swap button icon and text
+          swapIcon.classList.remove("fa-desktop");
+          swapIcon.classList.add("fa-camera");
+          swapText.innerText = "Share Webcam";
+          switchStreamHelper(stream);
+        })
+        .catch(function (err) {
+          logIt(err);
+          logIt("Error sharing screen");
+          Snackbar.close();
+        });
     // If mode is screenshare then switch to webcam
   } else {
     // Stop the screen share track
     VideoChat.localVideo.srcObject.getTracks().forEach((track) => track.stop());
     // Get webcam input
     navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: true,
-      })
-      .then(function (stream) {
-        // Change display mode
-        mode = "camera";
-        // Update swap button icon and text
-        swapIcon.classList.remove("fa-camera");
-        swapIcon.classList.add("fa-desktop");
-        swapText.innerText = "Share Screen";
-        switchStreamHelper(stream);
-      });
+        .getUserMedia({
+          video: true,
+          audio: true,
+        })
+        .then(function (stream) {
+          // Change display mode
+          mode = "camera";
+          // Update swap button icon and text
+          swapIcon.classList.remove("fa-camera");
+          swapIcon.classList.add("fa-desktop");
+          swapText.innerText = "Share Screen";
+          switchStreamHelper(stream);
+        });
   }
 }
 
@@ -607,7 +606,7 @@ function requestToggleCaptions() {
   } else {
     Snackbar.show({
       text:
-        "This is an experimental feature. Live caption requires the other user to be using Chrome",
+          "This is an experimental feature. Live caption requires the other user to be using Chrome",
       width: "400px",
       pos: "bottom-center",
       actionTextColor: "#616161",
@@ -635,7 +634,7 @@ function toggleSendCaptions() {
 function startSpeech() {
   try {
     var SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
+        window.SpeechRecognition || window.webkitSpeechRecognition;
     VideoChat.recognition = new SpeechRecognition();
     // VideoChat.recognition.lang = "en";
   } catch (e) {
@@ -663,7 +662,7 @@ function startSpeech() {
         // Send captions over data chanel,
         // subtracting as many complete 100 char slices from start
         dataChanel.send(
-          "cap:" +
+            "cap:" +
             interimTranscript.substring(interimTranscript.length - charsToKeep)
         );
       }
@@ -691,7 +690,7 @@ function recieveCaptions(captions) {
   // Other user is not using chrome
   if (captions === "notusingchrome") {
     alert(
-      "Other caller must be using chrome for this feature to work. Live Caption turned off."
+        "Other caller must be using chrome for this feature to work. Live Caption turned off."
     );
     receivingCaptions = false;
     captionText.text("").fadeOut();
@@ -741,13 +740,13 @@ function recieveCaptions(captions) {
 function addMessageToScreen(msg, isOwnMessage) {
   if (isOwnMessage) {
     $(".chat-messages").append(
-      '<div class="message-item customer cssanimation fadeInBottom"><div class="message-bloc"><div class="message">' +
+        '<div class="message-item customer cssanimation fadeInBottom"><div class="message-bloc"><div class="message">' +
         msg +
         "</div></div></div>"
     );
   } else {
     $(".chat-messages").append(
-      '<div class="message-item moderator cssanimation fadeInBottom"><div class="message-bloc"><div class="message">' +
+        '<div class="message-item moderator cssanimation fadeInBottom"><div class="message-bloc"><div class="message">' +
         msg +
         "</div></div></div>"
     );
@@ -810,8 +809,8 @@ function toggleChat() {
 //Picture in picture
 function togglePictureInPicture() {
   if (
-    "pictureInPictureEnabled" in document ||
-    remoteVideoVanilla.webkitSetPresentationMode
+      "pictureInPictureEnabled" in document ||
+      remoteVideoVanilla.webkitSetPresentationMode
   ) {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture().catch((error) => {
@@ -821,19 +820,19 @@ function togglePictureInPicture() {
     } else if (remoteVideoVanilla.webkitPresentationMode === "inline") {
       remoteVideoVanilla.webkitSetPresentationMode("picture-in-picture");
     } else if (
-      remoteVideoVanilla.webkitPresentationMode === "picture-in-picture"
+        remoteVideoVanilla.webkitPresentationMode === "picture-in-picture"
     ) {
       remoteVideoVanilla.webkitSetPresentationMode("inline");
     } else {
       remoteVideoVanilla.requestPictureInPicture().catch((error) => {
         alert(
-          "You must be connected to another person to enter picture in picture."
+            "You must be connected to another person to enter picture in picture."
         );
       });
     }
   } else {
     alert(
-      "Picture in picture is not supported in your browser. Consider using Chrome or Safari."
+        "Picture in picture is not supported in your browser. Consider using Chrome or Safari."
     );
   }
 }
@@ -843,10 +842,10 @@ function startUp() {
   //  Try and detect in-app browsers and redirect
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   if (
-    DetectRTC.isMobileDevice &&
-    (ua.indexOf("FBAN") > -1 ||
-      ua.indexOf("FBAV") > -1 ||
-      ua.indexOf("Instagram") > -1)
+      DetectRTC.isMobileDevice &&
+      (ua.indexOf("FBAN") > -1 ||
+          ua.indexOf("FBAV") > -1 ||
+          ua.indexOf("Instagram") > -1)
   ) {
     if (DetectRTC.osName === "iOS") {
       window.location.href = "/notsupportedios";
@@ -925,8 +924,8 @@ function startUp() {
     duration: 50000,
     onActionClick: function (element) {
       window.open(
-        "https://getacclaim.zendesk.com/hc/en-us/articles/360001547832-Setting-the-default-camera-on-your-browser",
-        "_blank"
+          "https://getacclaim.zendesk.com/hc/en-us/articles/360001547832-Setting-the-default-camera-on-your-browser",
+          "_blank"
       );
     },
   });

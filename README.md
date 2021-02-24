@@ -15,6 +15,7 @@ Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infra
 <img align="right" width="400" height="auto" src="public/assets/img/background/img-85.jpg">
 
 - Screen sharing
+- A.I Facial Recognition Algorithm
 - Picture in picture
 - Live captions
 - Text chat

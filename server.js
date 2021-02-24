@@ -1,20 +1,10 @@
 let sslRedirect = require("heroku-ssl-redirect");
-// Get twillio auth and SID from heroku if deployed, else get from local .env file
 let twilio = require("twilio")("AC3966345b4262d57c925ff3df21b1e640", "d7fde3319cf34d5c840a82f1894a8bfc");
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
-// DB configuration Data
-const users  = [];
 
-const initializePassport = require('./passport-config');
-initializePassport(
-    passport, email => users.find(user => user.email === email),
-        id => users.find(user => user.id === id)
-);
-
-const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 let express = require("express");
 let app = express();
@@ -23,6 +13,9 @@ let io = require("socket.io")(http);
 let path = require("path");
 let public = path.join(__dirname, "public");
 const url = require("url");
+const { v4: uuidV4 } = require('uuid');
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(http, {debug: true});
 
 // Session handler creator
 function sessionCreator(length) {
@@ -37,6 +30,7 @@ function sessionCreator(length) {
 
 // enable ssl redirect
 app.use(sslRedirect());
+app.use('/peerjs', peerServer);
 
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
@@ -62,21 +56,6 @@ app.use(function (req, res, next) {
   }
 });
 
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()){
-    return next
-  }
-
-  res.redirect('/login');
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()){
-    return res.redirect('/')
-  }
-
-  next()
-}
 
 app.get("/", function (req, res) {
   res.render(path.join(public, "landing.ejs"));
@@ -115,6 +94,14 @@ app.post("/register", async function (req, res) {
 app.delete("/logout", function (req, res) {
   req.logOut();
   res.redirect('/login')
+});
+
+app.get("/meetings", function (req, res) {
+  res.redirect(`/meetings/${uuidV4()}`)
+});
+
+app.get('/meetings/:room', (req, res) => {
+  res.render(path.join(public, "meeting-room.ejs"), {roomId: req.params.room})
 });
 
 app.get("/newcall", function (req, res) {
@@ -158,13 +145,14 @@ function logIt(msg, room) {
 io.on("connection", function (socket) {
   // When a client tries to join a room, only allow them if they are first or
   // second in the room. Otherwise it is full.
+
   socket.on("join", function (room) {
     logIt("A client joined the room", room);
     var clients = io.sockets.adapter.rooms[room];
     var numClients = typeof clients !== "undefined" ? clients.length : 0;
     if (numClients === 0) {
       socket.join(room);
-    } else if (numClients === 50) {
+    } else if (numClients === 1) {
       socket.join(room);
       // When the client is second to join the room, both clients are ready.
       logIt("Broadcasting ready message", room);
@@ -176,6 +164,12 @@ io.on("connection", function (socket) {
       logIt("room already full", room);
       socket.emit("full", room);
     }
+  });
+
+  // When someone tries to connect to our multi-conference room, trigger event listener
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit('user-connected', userId);
   });
 
   // When receiving the token message, use the Twilio REST API to request an

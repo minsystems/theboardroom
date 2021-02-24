@@ -1,5 +1,5 @@
 {
-  "name": "Boardroom",
+  "name": "boardroom",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "See License",
   "dependencies": {
+    "@google-cloud/translate": "^6.1.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "ejs": "^3.1.5",
@@ -22,8 +23,10 @@
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "peer": "^0.6.1",
     "socket.io": "^2.2.0",
-    "twilio": "^3.34.0"
+    "twilio": "^3.34.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
