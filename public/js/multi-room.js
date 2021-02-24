@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
 myVideo.muted = true;
 
-const peer = new Peer(undefined, {path: '/peerjs', host: '/', port: 3000});
+const peer = new Peer(undefined, {path: '/peerjs', host: '/', port: 443});
 
 
 let myVideoStream;
