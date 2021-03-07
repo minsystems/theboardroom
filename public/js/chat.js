@@ -578,7 +578,7 @@ function switchStreamHelper(stream) {
       return s.track.kind === videoTrack.kind;
     });
     // Replace sender track
-    sender.replaceTrack(videoTrack);
+    sender.replaceTrack(videoTrack).then(r => console.log(r));
   }
   // Update local video stream
   VideoChat.localStream = videoTrack;

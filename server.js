@@ -97,6 +97,10 @@ app.delete("/logout", function (req, res) {
 });
 
 app.get("/meetings", function (req, res) {
+  res.render(path.join(public, 'meeting.ejs'));
+});
+
+app.get("/meetings/conference", function (req, res) {
   res.redirect(`/meetings/${uuidV4()}`)
 });
 
@@ -170,6 +174,26 @@ io.on("connection", function (socket) {
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId);
     socket.to(roomId).broadcast.emit('user-connected', userId);
+
+    // messages
+    socket.on('message', (message, userId) => {
+      //send message to the same room
+      io.to(roomId).emit('createMessage', message, userId)
+    });
+
+    socket.on('user-disconnected', () => {
+      socket.to(roomId).broadcast.emit('user-disconnected', userId);
+    });
+
+    twilio.tokens.create(function (err, response) {
+      if (err) {
+        console.log(err, roomId);
+      } else {
+        console.log("Token generated. Returning it to the browser client: " + roomId);
+        socket.emit("token-share", response).to(roomId);
+      }
+    }).then(r => console.log(r));
+
   });
 
   // When receiving the token message, use the Twilio REST API to request an
